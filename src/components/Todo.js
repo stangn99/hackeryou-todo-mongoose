@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Todo = props => {
-  const { description, index, removeTodo } = props
+  const { description, id, removeTodo, completeTodo, completed } = props
   return (
     <li key={description}>
-      {description}
-      <button onClick={() => removeTodo(index)}>Remove Todo</button>
+  
+      {completed ? <del>{description}</del> : description}
+      <button onClick={() => removeTodo(id)}>Remove Todo</button>
+      <button onClick={() => completeTodo(id)}>Complete Todo</button>
     </li>
   )
 }

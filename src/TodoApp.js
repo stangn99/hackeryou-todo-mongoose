@@ -50,6 +50,19 @@ class TodoApp extends Component {
     }
   }
 
+  completeToDo = async id => {
+    try {
+      // Make a patch request to the /todos/:id/complete
+      // which will set complete to true for the given ID
+      await axios.patch(`/todos/${id}/complete`);
+      
+      // re-request all todos
+      this.refresh()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   handleChange = e => {
     this.setState({
       todo: e.target.value
@@ -64,7 +77,10 @@ class TodoApp extends Component {
           addTodo={this.addTodo}
           todo={this.state.todo}
         />
-        <ShowTodos todos={this.state.todos} removeTodo={this.removeTodo} />
+        <ShowTodos 
+          todos={this.state.todos} 
+          removeTodo={this.removeTodo}  
+          completeTodo={this.completeToDo}/>
       </div>
     )
   }
